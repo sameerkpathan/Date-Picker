@@ -1,25 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { sampleData } from "./MockData";
+import DataCard from "./DateCard";
+import { useState } from "react";
 
-function App() {
+
+
+const App = () => {
+  const [selectedDate, setSelectedDate] = useState("");
+
+  const handleDateChange = (event) => {
+    setSelectedDate(event.target.value);
+  };
+
+  const filteredData = selectedDate
+    ? sampleData.filter((item) => item.date === selectedDate)
+    : sampleData;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div className="datepicker">
+      <h1>Data Picker</h1>
+      <div className="inputsection">
+        <input
+          type="date"
+          value={selectedDate}
+          className="box"
+          onChange={handleDateChange}
+          placeholder="Select a date"
+        />
+        <button
+        className="box"
+          onClick={() => {
+            setSelectedDate("");
+          }}
         >
-          Learn React
-        </a>
-      </header>
+          Clear Date
+        </button>
+      </div>
+
+      <div className="card-list">
+        {filteredData.map((data) => (
+          <DataCard key={data.id} data={data} />
+        ))}
+      </div>
     </div>
   );
-}
+};
 
 export default App;
