@@ -44,6 +44,7 @@ const App = () => {
         className="box"
           onClick={() => {
             setSelectedDate("");
+            setSelectedTime("");
           }}
         >
           Clear Date
