@@ -7,15 +7,21 @@ import { useState } from "react";
 
 const App = () => {
   const [selectedDate, setSelectedDate] = useState("");
+  const [selectedTime, setSelectedTime] = useState("");
 
   const handleDateChange = (event) => {
     setSelectedDate(event.target.value);
   };
 
+  const handleTimeChange = (event)=>{
+      setSelectedTime(event.target.value);
+  }
+
   const filteredData = selectedDate
-    ? sampleData.filter((item) => item.date === selectedDate)
+    ? sampleData.filter((item) => item.date === selectedDate && item.time === selectedTime)
     : sampleData;
 
+    
   return (
     <div className="datepicker">
       <h1>Data Picker</h1>
@@ -26,6 +32,13 @@ const App = () => {
           className="box"
           onChange={handleDateChange}
           placeholder="Select a date"
+        />
+        <input 
+        type="time"
+        value={selectedTime}
+        className="box"
+        onChange={handleTimeChange}
+        placeholder="Select a time"
         />
         <button
         className="box"
